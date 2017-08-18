@@ -16,11 +16,16 @@ public class Object_Driver {
 
         WordFamily wf = new WordFamily(list,4);
 
-        ArrayList<String> wflist = wf.getFamilyList();
+//        ArrayList<String> wflist = wf.getFamilyList();
+//
+//        for (String word : wflist){
+//            System.out.println(word);
+//        }
 
-        for (String word : wflist){
-            System.out.println(word);
-        }
+        SpecificFamily sf = new SpecificFamily(wf,'e');
+
+        System.out.println(sf.getIDENTITY());
+
     }
 
 }
