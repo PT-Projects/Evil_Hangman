@@ -17,7 +17,7 @@ public class Dictionary {
     private void readDictionary(){
 
         //Directory will need to change upon computer change
-        File dictionary = new File("/Users/oliverscotten/IdeaProjects/Evil_Hangman/Objects/src/text.txt");
+        File dictionary = new File("/Users/oliverscotten/IdeaProjects/Evil_Hangman/Objects/src/dictionary.txt");
 
         Scanner in = null;
         try {

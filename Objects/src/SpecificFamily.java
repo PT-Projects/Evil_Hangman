@@ -1,54 +1,35 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SpecificFamily{
 
-    private String IDENTITY = "";
-    private ArrayList<String> wordList;
-    private Character LETTER;
+    private ArrayList<String> familyList = new ArrayList<>();
+    private String IDENTITY;
 
-    public SpecificFamily(WordFamily family, Character letter){
-        LETTER = letter;
-        setWordList(family);
+    public SpecificFamily(WordFamily family, ArrayList<String> IdentityList, String identityCode){
 
+        IDENTITY = identityCode;
 
-        for (String word : getWordList()){
-            String text = setIDENTITY(word);
-            IDENTITY += text + " ";
-        }
+        sortList(family, IdentityList);
 
     }
 
-    private void setWordList(WordFamily family){
-        wordList = family.getFamilyList();
-    }
+    private void sortList(WordFamily family, ArrayList<String> codeList){
 
-    private String setIDENTITY(String word){
+        ArrayList<String> list = family.getFamilyList();
 
         int x = 0;
 
-        String identify = "";
-
-
-            while (x < word.length()) {
-
-                String s = word.substring(x, x + 1);
-
-                if (s.equals(LETTER.toString())) {
-                    identify += LETTER;
-                } else {
-                    identify += '-';
-                }
-
-                x++;
+        for (String code : codeList){
+            if (code.equals(IDENTITY)){
+                familyList.add(list.get(x));
             }
-
-
-        return identify;
-
+            x++;
+        }
     }
 
     public ArrayList<String> getWordList() {
-        return wordList;
+        return familyList;
     }
 
     public String getIDENTITY(){
