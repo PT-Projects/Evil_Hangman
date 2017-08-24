@@ -63,7 +63,7 @@ public class WordFamily {
         return list;
     }
 
-    public ArrayList getFamilyList(){
+    public ArrayList<String> getFamilyList(){
         return familyList;
     }
 
