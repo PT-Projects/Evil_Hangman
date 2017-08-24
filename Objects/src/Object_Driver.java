@@ -30,9 +30,11 @@ public class Object_Driver {
 
         WordFamily wf = new WordFamily(list, 4);
 
-        ArrayList<String> identityList = wf.identifyWords('a');
+        ArrayList<String> identityList = wf.identifyWords('e');
 
         String code = identityList.get(0);
+
+//        String code = "-e--";
 
         System.out.println(code);
 
