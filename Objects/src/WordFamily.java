@@ -29,11 +29,11 @@ public class WordFamily {
         }
     }
 
-    private String identity(Character letter, String word){
+    private String getIdentity(Character letter, String word){
 
         int x = 0;
 
-        String identify = "";
+        String identity = "";
 
 
         while (x < word.length()) {
@@ -41,13 +41,13 @@ public class WordFamily {
             String s = word.substring(x, x + 1);
 
             if (s.equals(letter.toString())) {
-                identify += letter;
+                identity += letter;
             } else {
-                identify += '-';
+                identity += '-';
             }
             x++;
         }
-        return identify;
+        return identity;
     }
 
     public ArrayList<String> identifyWords(Character letter){
@@ -55,9 +55,9 @@ public class WordFamily {
         ArrayList<String> list = new ArrayList<>();
 
         for (String word : familyList){
-            String identify = identity(letter,word);
+            String identity = getIdentity(letter,word);
 
-            list.add(identify);
+            list.add(identity);
         }
 
         return list;
