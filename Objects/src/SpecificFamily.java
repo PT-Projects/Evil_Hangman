@@ -34,4 +34,14 @@ public class SpecificFamily{
     public String getIDENTITY(){
         return IDENTITY;
     }
+
+    public void addWords(ArrayList<String> wordList, String code){
+        if (IDENTITY.equals(code)){
+            familyList.addAll(wordList);
+        }
+    }
+
+    public int getListSize(){
+        return familyList.size();
+    }
 }

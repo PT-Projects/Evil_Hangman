@@ -32,15 +32,33 @@ public class Object_Driver {
 
         ArrayList<String> identityList = wf.identifyWords('e');
 
-        String code = identityList.get(0);
+//        String code = identityList.get(0);
 
-//        String code = "-e--";
+        String code = "-e--";
+        String code2 = "-ee-";
 
-        System.out.println(code);
+        System.out.println("1: " + code);
+        System.out.println("2: " + code2);
 
         SpecificFamily sf = new SpecificFamily(wf, identityList, code);
+        SpecificFamily sf2 = new SpecificFamily(wf, identityList, code2);
 
-        System.out.println(sf.getWordList());
+        FamilyList fl = new FamilyList();
+
+        fl.addFamily(sf);
+        fl.addFamily(sf2);
+
+        ArrayList<SpecificFamily> sfList = fl.getSpecificFamilyList();
+
+        System.out.println(sfList.get(0).getIDENTITY());
+
+        System.out.println(sfList.get(1).getIDENTITY());
+
+        System.out.println(sfList.get(0).getWordList());
+
+        System.out.println(sfList.get(1).getWordList());
+
+        System.out.println(fl.getLargestFamily().getListSize());
 
     }
 
