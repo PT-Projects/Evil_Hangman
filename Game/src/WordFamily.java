@@ -67,4 +67,13 @@ public class WordFamily {
         return familyList;
     }
 
+
+    /**
+     * TEMPORARY
+     * @param wordList
+     */
+    public void setWordList(ArrayList<String> wordList){
+        familyList = wordList;
+    }
+
 }

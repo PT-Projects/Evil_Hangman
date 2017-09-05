@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Game {
@@ -7,11 +9,11 @@ public class Game {
 
     Dictionary dictionary;
 
-//    ArrayList<String> DictionaryList;
-
     int wordLength = 0;
 
     int remainingGuesses = 0;
+
+    ArrayList<String> dictionaryList;
 
     boolean runningTotal = false;
 
@@ -23,7 +25,7 @@ public class Game {
 
         dictionary = new Dictionary();
 
-//        DictionaryList = dictionary.getDictionaryList();
+        dictionaryList = dictionary.getDictionaryList();
 
     }
 
@@ -35,7 +37,7 @@ public class Game {
 
         runningTotal();
 
-        RUN();
+        RUN(play);
 
     }
 
@@ -130,7 +132,7 @@ public class Game {
 
     }
 
-    private String getCharacterGuess(){
+    private Character getCharacterGuess(){
 
         boolean clear = true;
 
@@ -155,18 +157,45 @@ public class Game {
             getCharacterGuess();
         }
 
-        return character;
+        return character.charAt(0);
     }
 
-    private void RUN(){
+    /**
+     * Method found on Internet
+     * @param codeList
+     * @return
+     */
+    private String mostCommon(ArrayList<String> codeList){
 
-        WordFamily wf = new WordFamily(dictionary.getDictionaryList(),wordLength);
+        Map<String, Integer> map = new HashMap<String, Integer>();
 
-        Character c = getCharacterGuess().charAt(0);
+        for(int i=0; i< codeList.size(); i++) {
 
-        ArrayList<String> wfI = wf.identifyWords(c);
+            Integer frequency = map.get(codeList.get(i));
+            if(frequency == null) {
+                map.put(codeList.get(i), 1);
+            } else {
+                map.put(codeList.get(i), frequency+1);
+            }
+        }
 
-        SpecificFamily sf = new SpecificFamily(wf,wfI,)
+        String mostCommonKey = null;
+        int maxValue = -1;
+        for(Map.Entry<String, Integer> entry: map.entrySet()) {
+
+            if(entry.getValue() > maxValue) {
+                mostCommonKey = entry.getKey();
+                maxValue = entry.getValue();
+            }
+        }
+
+        return mostCommonKey;
+
+    }
+
+    private void RUN(boolean PLAY){
+
+
 
     }
 
