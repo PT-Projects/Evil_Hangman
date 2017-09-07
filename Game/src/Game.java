@@ -195,7 +195,23 @@ public class Game {
 
     private void RUN(boolean PLAY){
 
+        WordFamily wf = new WordFamily(dictionaryList,wordLength);
 
+        SpecificFamily sf;
+
+        while (PLAY) {
+
+            Character c = getCharacterGuess();
+
+            sf = new SpecificFamily(wf,wf.identifyWords(c),mostCommon(wf.identifyWords(c)));
+
+            wf.setWordList(sf.getWordList());
+
+            System.out.println(sf.getIDENTITY());
+
+            System.out.println(sf.getWordList());
+
+        }
 
     }
 
