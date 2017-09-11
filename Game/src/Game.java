@@ -19,8 +19,6 @@ public class Game {
 
     boolean play = true;
 
-    String code;
-
     public Game() {
 
         in = new Scanner(System.in);
@@ -29,15 +27,11 @@ public class Game {
 
         dictionaryList = dictionary.getDictionaryList();
 
-        code = "";
-
     }
 
     public void START(){
 
         getUserLength();
-
-        setCode();
 
         getGuess();
 
@@ -69,38 +63,6 @@ public class Game {
             logicError();
             getUserLength();
         }
-
-    }
-
-    /**
-     * Linnea's
-     */
-    private void setCode(){
-        for (int x = 0; x < wordLength; x++){
-            code += "-";
-        }
-    }
-
-    /**
-     * Linnea's
-     * @param identity
-     */
-    private void compare(String identity){
-
-        String newCode = "";
-
-        for (int x = 0; x < identity.length(); x++){
-
-            if (code.charAt(x) == '-' && identity.charAt(x) != '-'){
-                newCode += identity.charAt(x);
-            }
-            else{
-                newCode += code.charAt(x);
-            }
-
-        }
-
-        code = newCode;
 
     }
 
@@ -203,7 +165,7 @@ public class Game {
      * @param codeList
      * @return
      */
-    private void mostCommon(ArrayList<String> codeList){
+    private String mostCommon(ArrayList<String> codeList){
 
         Map<String, Integer> map = new HashMap<String, Integer>();
 
@@ -227,7 +189,7 @@ public class Game {
             }
         }
 
-        compare(mostCommonKey);
+        return mostCommonKey;
 
     }
 
@@ -243,9 +205,7 @@ public class Game {
 
             c = getCharacterGuess();
 
-            mostCommon(wf.identifyWords(c));
-
-            sf = new SpecificFamily(wf,code);
+            sf = new SpecificFamily(wf,wf.identifyWords(c),mostCommon(wf.identifyWords(c)));
 
             wf.setWordList(sf.getWordList());
 
