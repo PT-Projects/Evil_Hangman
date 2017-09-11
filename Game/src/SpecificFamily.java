@@ -5,11 +5,13 @@ public class SpecificFamily{
     private ArrayList<String> familyList = new ArrayList<>();
     private String IDENTITY;
 
-    public SpecificFamily(WordFamily family, ArrayList<String> IdentityList, String identityCode){
+    public SpecificFamily(WordFamily family, String identityCode){
 
         IDENTITY = identityCode;
 
-        sortList(family, IdentityList);
+        Identity ID = new Identity(family.getFamilyList());
+
+        sortList(family, ID.getIdentityList());
 
     }
 
@@ -17,14 +19,23 @@ public class SpecificFamily{
 
         ArrayList<String> list = family.getFamilyList();
 
-        int x = 0;
+        System.out.println(list.size());
 
-        for (String code : codeList){
-            if (code.equals(IDENTITY)){
+        for (int x = 0; x < list.size(); x++){
+
+            if (codeList.get(x).equals(IDENTITY)){
+
                 familyList.add(list.get(x));
             }
-            x++;
+
+
+
+//            if (code.equals(IDENTITY)){
+//                familyList.add(list.get(x));
+//            }
+
         }
+
     }
 
     public ArrayList<String> getWordList() {

@@ -17,9 +17,13 @@ public class Game {
 
     boolean runningTotal = false;
 
-    boolean play = true;
+    boolean PLAY = true;
 
     String code;
+
+    ArrayList<String> wordList;
+
+    FamilyList familyList;
 
     public Game() {
 
@@ -31,11 +35,21 @@ public class Game {
 
         code = "";
 
+        wordList = new ArrayList<>();
+
+        familyList = new FamilyList();
+
     }
 
     public void START(){
 
         getUserLength();
+
+        for (String word: dictionaryList){
+            if (word.length() == wordLength){
+                wordList.add(word);
+            }
+        }
 
         setCode();
 
@@ -43,7 +57,7 @@ public class Game {
 
         runningTotal();
 
-        RUN(play);
+        RUN();
 
     }
 
@@ -62,10 +76,12 @@ public class Game {
         }
 
         if (!clear) {
+            System.out.println("loop");
             getUserLength();
         }
 
         else if (dictionary.getWords(wordLength) == 0){
+            System.out.println("loop");
             logicError();
             getUserLength();
         }
@@ -119,10 +135,12 @@ public class Game {
         }
 
         if (!clear) {
+            System.out.println("loop");
             getGuess();
         }
 
         else if (remainingGuesses <= 0){
+            System.out.println("loop");
             logicError();
             getGuess();
         }
@@ -147,6 +165,7 @@ public class Game {
         }
 
         if (!clear) {
+            System.out.println("loop");
             runningTotal();
         }
 
@@ -158,12 +177,14 @@ public class Game {
                 runningTotal = false;
             }
             else{
+                System.out.println("loop");
                 logicError();
                 runningTotal();
             }
         }
 
         else{
+            System.out.println("loop");
             logicError();
             runningTotal();
         }
@@ -187,10 +208,12 @@ public class Game {
         }
 
         if (!clear) {
+            System.out.println("loop");
             getCharacterGuess();
         }
 
         else if (character.length() == 0 || character.length() > 1){
+            System.out.println("loop");
             logicError();
             getCharacterGuess();
         }
@@ -198,60 +221,31 @@ public class Game {
         return character.charAt(0);
     }
 
-    /**
-     * Method found on Internet
-     * @param codeList
-     * @return
-     */
-    private void mostCommon(ArrayList<String> codeList){
-
-        Map<String, Integer> map = new HashMap<String, Integer>();
-
-        for(int i=0; i< codeList.size(); i++) {
-
-            Integer frequency = map.get(codeList.get(i));
-            if(frequency == null) {
-                map.put(codeList.get(i), 1);
-            } else {
-                map.put(codeList.get(i), frequency+1);
-            }
-        }
-
-        String mostCommonKey = null;
-        int maxValue = -1;
-        for(Map.Entry<String, Integer> entry: map.entrySet()) {
-
-            if(entry.getValue() > maxValue) {
-                mostCommonKey = entry.getKey();
-                maxValue = entry.getValue();
-            }
-        }
-
-        compare(mostCommonKey);
-
-    }
-
-    private void RUN(boolean PLAY){
+    private void RUN(){
 
         Character c;
 
-        WordFamily wf = new WordFamily(dictionaryList,wordLength);
-
-        SpecificFamily sf;
-
-        while (PLAY) {
+        while (PLAY){
 
             c = getCharacterGuess();
+            System.out.println(wordList.size());
 
-            mostCommon(wf.identifyWords(c));
 
-            sf = new SpecificFamily(wf,code);
+            for (int x = 0; x < wordList.size(); x++){
+//                System.out.print("loop");
+                String word = wordList.get(x);
+                familyList.addFamily(word,c);
+            }
 
-            wf.setWordList(sf.getWordList());
+            wordList = familyList.getLargestFamily().getWordList();
 
-            System.out.println(sf.getIDENTITY());
+            code = familyList.getLargestFamily().getCode();
 
-            System.out.println(sf.getWordList());
+            System.out.println(code);
+
+            System.out.println(wordList);
+
+            System.out.println("LOOP");
 
         }
 

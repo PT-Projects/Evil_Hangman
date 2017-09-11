@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Evil_Hangman.iml" filepath="$PROJECT_DIR$/Evil_Hangman.iml" />
       <module fileurl="file://$PROJECT_DIR$/Game/Game.iml" filepath="$PROJECT_DIR$/Game/Game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Game Rebuild/Game Rebuild.iml" filepath="$PROJECT_DIR$/Game Rebuild/Game Rebuild.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Restart/Restart.iml" filepath="$PROJECT_DIR$/Restart/Restart.iml" />
     </modules>
   </component>
 </project>
