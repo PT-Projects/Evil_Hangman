@@ -5,26 +5,29 @@ public class SpecificFamily{
     private ArrayList<String> familyList = new ArrayList<>();
     private String IDENTITY;
 
-    public SpecificFamily(WordFamily family, ArrayList<String> IdentityList, String identityCode){
+    public SpecificFamily(WordFamily family, String identityCode, Character letter){
 
         IDENTITY = identityCode;
 
-        sortList(family, IdentityList);
+        sortList(family,identityCode,letter);
 
     }
 
-    private void sortList(WordFamily family, ArrayList<String> codeList){
+    private void sortList(WordFamily family, String code, Character letter){
 
-        ArrayList<String> list = family.getFamilyList();
-
-        int x = 0;
-
-        for (String code : codeList){
-            if (code.equals(IDENTITY)){
-                familyList.add(list.get(x));
+        for (String word : family.getFamilyList()){
+            if (toID(word,letter).equals(code)){
+                familyList.add(toID(word,letter));
             }
-            x++;
         }
+
+    }
+
+    private String toID(String word, Character letter){
+
+        String identity = "";
+
+        return identity;
     }
 
     public ArrayList<String> getWordList() {
