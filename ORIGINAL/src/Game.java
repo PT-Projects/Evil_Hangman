@@ -17,9 +17,7 @@ public class Game {
 
     boolean runningTotal = false;
 
-    boolean play = true;
-
-    String code;
+    boolean PLAY = true;
 
     public Game() {
 
@@ -29,21 +27,78 @@ public class Game {
 
         dictionaryList = dictionary.getDictionaryList();
 
-        code = "";
-
     }
 
     public void START(){
 
         getUserLength();
 
-        setCode();
-
         getGuess();
 
         runningTotal();
 
-        RUN(play);
+        RUN();
+
+        playAgain(getPlayAgain());
+
+    }
+
+    private void FINISH(){
+        System.out.println("GAME OVER: SHUTTING DOWN");
+    }
+
+    private void playAgain(boolean check){
+        if (check){
+            START();
+            System.out.println("-----------------------------");
+        }
+        else{
+            FINISH();
+        }
+    }
+
+    private boolean getPlayAgain(){
+
+        boolean clear = true;
+
+        boolean finish = false;
+
+        String check = "";
+
+        System.out.print("Play Again (Y,N): ");
+
+        try {
+            check = in.next();
+            check = check.toUpperCase();
+        } catch (Exception e) {
+            inputError();
+            in.nextLine();
+            clear = false;
+        }
+
+        if (!clear) {
+            getPlayAgain();
+        }
+
+        else if (check.equals("Y") || check.equals("N")){
+            if (check.equals("Y")){
+                finish = true;
+            }
+            else if (check.equals("N")){
+                finish = false;
+            }
+            else{
+                logicError();
+                getPlayAgain();
+            }
+        }
+
+        else{
+            logicError();
+            getPlayAgain();
+        }
+
+        return finish;
 
     }
 
@@ -69,38 +124,6 @@ public class Game {
             logicError();
             getUserLength();
         }
-
-    }
-
-    /**
-     * Linnea's
-     */
-    private void setCode(){
-        for (int x = 0; x < wordLength; x++){
-            code += "-";
-        }
-    }
-
-    /**
-     * Linnea's
-     * @param identity
-     */
-    private void compare(String identity){
-
-        String newCode = "";
-
-        for (int x = 0; x < identity.length(); x++){
-
-            if (code.charAt(x) == '-' && identity.charAt(x) != '-'){
-                newCode += identity.charAt(x);
-            }
-            else{
-                newCode += code.charAt(x);
-            }
-
-        }
-
-        code = newCode;
 
     }
 
@@ -231,7 +254,7 @@ public class Game {
 
     }
 
-    private void RUN(boolean PLAY){
+    private void RUN(){
 
         Character c;
 
@@ -241,6 +264,10 @@ public class Game {
 
         while (PLAY) {
 
+            System.out.println("-----------------------------");
+
+            remainingGuesses --;
+
             c = getCharacterGuess();
 
             mostCommon(wf.identifyWords(c));
@@ -249,10 +276,23 @@ public class Game {
 
             wf.setWordList(sf.getWordList());
 
-            System.out.println(sf.getIDENTITY());
+            System.out.println("Word: " + sf.getIDENTITY());
 
-            System.out.println(sf.getWordList());
+            System.out.println("Remaining Guesses: " + remainingGuesses);
 
+            if (runningTotal){
+                System.out.println("Number of Words Remaining: " + sf.getWordList().size());
+            }
+
+            if (remainingGuesses == 0){
+                PLAY = false;
+            }
+
+        }
+
+        if (!PLAY){
+            System.out.println("Game Over");
+            System.out.println("-----------------------------");
         }
 
     }
